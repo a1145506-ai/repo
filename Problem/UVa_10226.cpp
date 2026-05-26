@@ -9,8 +9,8 @@ int main() {
     int n;
     string s;
     cin >> n;
-    getline(cin, s); //clear buffer
-    getline(cin, s); //blank line
+    getline(cin, s); 
+    getline(cin, s); 
     while (n--){
         map <string, int> mp;
         int sum = 0;
