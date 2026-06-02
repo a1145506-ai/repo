@@ -1,37 +1,64 @@
 #include <iostream>
-#include <cstring>
+#include <vector>
+#include <string>
 #include <algorithm>
 using namespace std;
 
-int t, m, n, q, a[105][105], mx[105][105], x, y, ans;
-char c;
+void solve() {
+    int M, N, Q;
+    cin >> M >> N >> Q;
+    
+    vector<string> grid(M);
+    for (int i = 0; i < M; i++) {
+        cin >> grid[i];
+    }
+    
+    cout << M << " " << N << " " << Q << endl;
+    
+    while (Q--) {
+        int r, c;
+        cin >> r >> c;
+        
+        char center_char = grid[r][c]; 
+        int max_len = 1;        
+        for (int rad = 1; ; rad++) {
+            bool is_valid = true;
+            
+            for (int i = r - rad; i <= r + rad; i++) {
+                for (int j = c - rad; j <= c + rad; j++) {
+                    
+                   if (i < 0 || i >= M || j < 0 || j >= N) {
+                        is_valid = false;
+                        break;
+                    }
+                    if (grid[i][j] != center_char) {
+                        is_valid = false;
+                        break;
+                    }
+                }
+                if (!is_valid) break;
+            }
+            
+           if (is_valid) {
+                max_len = 2 * rad + 1;
+            } else {
+                break;
+            }
+        }
+        
+        cout << max_len << endl;
+    }
+}
 
 int main() {
-    memset(a, -1, sizeof(a));
-    cin >> t;
-    while (t--) {
-        cin >> m >> n >> q;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                cin >> c;
-                a[i][j] = (int)c;
-                if (i == 0 || j == 0) mx[i][j] = 1;
-                else if (a[i][j] == a[i - 1][j] && a[i][j] == a[i - 1][j - 1] && a[i][j] == a[i][j - 1]) {
-                    mx[i][j] = min({ mx[i - 1][j], mx[i - 1][j - 1], mx[i][j - 1] }) + 1;
-                }
-                else mx[i][j] = 1;
-            }
-        }
-        cout << m << " " << n << " " << q << "\n";
-        while (q--) {
-            cin >> x >> y;
-            ans = 1;
-            for (int i = 1; i <= 100; i++) {
-                if (x + i > m || y + i > n) break;
-                if (mx[x + i][y + i] >= ans + 2) ans += 2;
-                else break;
-            }
-            cout << ans << "\n";
-        }
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    
+    int T;
+    cin >> T;
+    while (T--) {
+        solve();
     }
+    
+    return 0;
 }

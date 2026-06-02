@@ -1,27 +1,27 @@
-#include <iostream>
-#include <iomanip>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    int T;
-    cin >> T;
+int main()
+{
+	int j, k;
+	int s, n, i;
+	double p, ans;
+	
+	cin >> s;
+	
+	for (j=0;j<s;j++) {
+		cin >> n >> p >> i;
+		
+		if (p < 1e-9) { 
+			cout << 0.0000 << endl;
+			continue;
+		}
+		
+		ans = (p * pow((1-p), i-1)) / (1 - pow((1-p), n));
+		
+		cout << fixed << setprecision(4) << ans << endl; 
+	}
 
-    while (T--) {
-        int N;
-        double p;
-        cin >> N >> p;
-
-        if (p == 0) {
-            cout << "0.0000" << endl;
-            continue;
-        }
-
-        double q = 1.0 - p;
-        double result = pow(q, N - 1) * p / (1.0 - pow(q, N));
-
-        cout << fixed << setprecision(4) << result << endl;
-    }
-
-    return 0;
+	return 0;
 }
+

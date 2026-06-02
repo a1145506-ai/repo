@@ -1,28 +1,32 @@
-#include <iostream>
-#include <iomanip>
-#include <map>
+#include <bits/stdc++.h>
 using namespace std;
- 
-int main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
+
+int main(){
+
     int n;
-    string s;
-    cin >> n;
-    getline(cin, s); 
-    getline(cin, s); 
-    while (n--){
-        map <string, int> mp;
-        int sum = 0;
-        while (getline(cin, s) && s != ""){
-            mp[s]++;
+    bool flag = false;
+    string name;
+
+    cin >> n >> ws;
+    while(n--){
+
+        if(flag){
+            cout << "\n";
+        }
+
+        flag = true;
+        double sum = 0;
+        map<string, int> mp;
+
+        while(getline(cin, name) && name != ""){
+            mp[name]++;
             sum++;
         }
+
         for (auto i: mp){
-            cout << i.first << " " <<
-            fixed << setprecision(4) << (double)i.second / sum * 100 << "\n";
+            cout << i.first << " " << fixed << setprecision(4) << (i.second / sum) * 100 << "\n";
         }
-        cout << "\n";
     }
+
     return 0;
 }

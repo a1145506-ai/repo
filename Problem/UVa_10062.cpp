@@ -1,30 +1,25 @@
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
-#define pii pair<int,int>
- 
-bool cmp(pii a, pii b){
-    if (a.first != b.first) return a.first < b.first;
-    else return a.second > b.second;
-}
- 
-int main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
+
+int main()
+{
     string s;
-    while (getline(cin, s)) {
-        pii a[256];
-        for (int i = 0; i < 256; i++) {
-            a[i] = {0, i};
+    int flag=0;
+    while(getline(cin,s))
+    {
+        int table[256]={0};
+        for(int i=0;i<s.length();i++){
+            table[s[i]]++;}
+        if(flag) cout<<"\n";
+        for(int i=1;i<=s.length();i++)
+        {
+            for(int j=127;j>=32;j--)
+            {
+                if(table[j]==i)
+                    cout<<j<<" "<<i<<"\n";
+            }
         }
-        for (int i = 0; i < s.size(); i++) {
-            a[(int)s[i]].first++;
-        }
-        sort(a, a+256, cmp);
-        for (auto i: a){
-            if (i.first > 0) cout << i.second << " " << i.first << "\n";
-        }
-        cout << "\n";
+        flag=1;
     }
     return 0;
 }

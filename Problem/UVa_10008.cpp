@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using sp=std::pair<char,int>;
+
 int main()
 {
   int n;

@@ -1,49 +1,47 @@
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
-#define ll long long
-int a[] = {10000000, 100000, 1000, 100};
-string s[] = {"kuti", "lakh", "hajar", "shata"};
-string ans;
- 
-string num2str(ll x){
-    string s = "";
-    while (x){
-        s += '0' + (x % 10);
-        x /= 10;
-    }
-    reverse(s.begin(), s.end());
-    return s;
-}
- 
-void solve(ll x){
-    if (x >= a[0]){
-        solve(x / a[0]);
-        ans += " " + s[0];
-        x %= (int)a[0];
-    }
-    for (int i = 0; i < 4; i++){
-        if (x / a[i] > 0){
-            ans += " " + num2str(x / a[i]) + " " + s[i];
-            x %= a[i];
-        }
-    }
-    if (x > 0) ans += " " + num2str(x);
-}
- 
-int main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    ll N;
-    int Case = 1;
-    while (cin >> N){
-        cout << "   " << Case++ << ".";
-        if (N == 0) cout << " 0\n";
+void Bangla(long long int n)
+{
+    while(n>0)
+    {
+        if(n>=10000000) {
+            cout<<" "<<n/10000000<<" kuti";
+            n%=10000000;
+            continue; }
+        if(100000<=n&&n<10000000) {
+            cout<<" "<<n/100000<<" lakh";
+            n%=100000;
+            continue; }
+        if(1000<=n&&n<100000) {
+            cout<<" "<<n/1000<<" hajar";
+            n%=1000;
+            continue; }
+        if(100<=n&&n<1000) { 
+            cout<<" "<<n/100<<" shata";
+            n%=100;
+            continue; }
         else {
-            ans = "";
-            solve(N);
-            cout << ans << "\n";
-        }
+            cout<<" "<<n;
+            break; }
+    }
+}
+
+int main()
+{
+    long long int n;
+    int T=1;
+    while(cin>>n)
+    {
+        cout<<setw(4)<<setfill(' ')<<T<<".";
+        if(n==0) cout<<" "<<0;
+        if(n>=10000000) {
+            Bangla(n/10000000);
+            cout<<" kuti";
+            Bangla(n%10000000);}
+        else {
+            Bangla(n);}
+        cout<<"\n";
+        T++;
     }
     return 0;
 }

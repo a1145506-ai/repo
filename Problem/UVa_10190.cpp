@@ -1,43 +1,36 @@
-#include <iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
-int main()
-{
-    int n, m;
-    while (cin >> n >> m)
-    {
-        bool out = true;
-        int a[100], num;
-        num = a[1] = n;
-        int i = 2;
-        if (m==1||n==1)
-        {
-            cout<<"Boring!"<<endl;continue;
+int main(){
+    long long int n,m;
+    while(cin>>n>>m){
+        if(n<2||m<2||n<m){
+            cout<<"Boring!"<<endl;
+            continue;
         }
-        while (num != 1)
-        {
-            if (num % m == 0)
-            {
-                num = a[i] = num / m;
-                i += 1;
-            }
-            else
-            {
-                cout << "Boring!" << endl;
-                out = false;
+        vector<long long> result;
+        bool possible=true;
+        long long int temp=n;
+        while(temp>1){
+            if(temp%m!=0){
+                possible=false;
                 break;
             }
+            result.push_back(temp);
+            temp/=m;
         }
-        if (out)
-        {
-            cout<<a[1];
-            for (int j = 2; j <= i - 1; j++)
-            {
-                cout<< " " << a[j] ;
+        result.push_back(1);
+        if(possible){
+            for(int i=0;i<result.size();i++){
+                cout<<result[i];
+                if(i==result.size()-1){
+                    cout<<endl;
+                }
+                else
+                    cout<<" ";
             }
-            cout << endl;
         }
-
-        
+        else
+            cout<<"Boring!"<<endl;
     }
 }
